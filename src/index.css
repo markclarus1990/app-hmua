@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+* {
+  color: rgb(53, 53, 53);
+}
+
+* label {
+  color: rgb(53, 53, 53);
+}
