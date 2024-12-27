@@ -135,7 +135,7 @@ const Summary = () => {
     setShowQRCode(false); // Close QR code modal
     setTimeout(() => {
       navigate("/hmua"); // Navigate to /hmua after a short delay
-    }, 300); // Adjust the delay (in ms) as necessary
+    }, 100); // Adjust the delay (in ms) as necessary
   }
   return (
     <div className="space-y-6">
