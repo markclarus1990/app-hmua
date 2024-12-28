@@ -82,7 +82,7 @@ const AnimatedRoutes = () => {
             {/* Root/Homepage Route */}
             <Route path="/app" element={<Applayout />}>
               <Route
-                path="/app/hmua"
+                path="/app-hmua/"
                 element={
                   <motion.div
                     variants={pageVariants}
