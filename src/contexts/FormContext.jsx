@@ -13,6 +13,7 @@ export const FormProvider = ({ children }) => {
     step7: {},
     homeScreen: true,
     limitedpax: 0,
+    signat: "",
 
     currentStep: 1,
   };
@@ -57,6 +58,12 @@ export const FormProvider = ({ children }) => {
           ...state,
           homeScreen: false,
         };
+
+      case "signature":
+        return {
+          ...state,
+          signat: action.payload,
+        };
       case "limited":
         return { ...state, limitedpax: action.payload };
       case "nextStep":
@@ -77,6 +84,7 @@ export const FormProvider = ({ children }) => {
   const setStep6Data = (data) => dispatch({ type: "step6", payload: data });
   const setStep7Data = (data) => dispatch({ type: "step7", payload: data });
   const setlimited = (data) => dispatch({ type: "limited", payload: data });
+  const setSignature = (data) => dispatch({ type: "signature", payload: data });
 
   const Booking = () => dispatch({ type: "book" });
 
@@ -103,6 +111,8 @@ export const FormProvider = ({ children }) => {
         setStep7Data,
         Booking,
         setlimited,
+        setSignature,
+        signature: state.signat,
         limitedpax: state.limitedpax,
         step6: state.step6,
         step7: state.step7,

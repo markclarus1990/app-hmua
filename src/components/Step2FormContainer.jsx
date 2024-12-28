@@ -1,4 +1,3 @@
-// src/components/Step2FormContainer.jsx
 import React, { useState } from "react";
 import MakeupPackageSelection from "./MakeupPackageSelection";
 import SubmitButton from "./SubmitButton";
@@ -15,9 +14,14 @@ const Step2FormContainer = ({ steps }) => {
   // On form submission
   const onSubmit = (data) => {
     console.log(data);
-    // const newData = { mPack: selectedPackage };
-    setStep2Data(selectedPackage);
 
+    // Check if selectedPackage is empty
+    if (!selectedPackage) {
+      alert("Please select a makeup package.");
+      return; // Don't proceed with setting data if no package is selected
+    }
+
+    setStep2Data(selectedPackage);
     console.log("FROM CONTEXT", step2);
     console.log("Selected Package:", selectedPackage);
   };
@@ -28,7 +32,9 @@ const Step2FormContainer = ({ steps }) => {
         selectedPackage={selectedPackage}
         setSelectedPackage={setSelectedPackage}
       />
-      <BUTTON form={"CoupleDetailsForm"} />
+      <BUTTON
+        form={selectedPackage ? `CoupleDetailsForm` : "PackageSelection"}
+      />
     </form>
   );
 };

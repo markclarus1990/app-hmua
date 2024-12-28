@@ -40,7 +40,9 @@ const Step4FormContainer = React.lazy(() =>
 const Step6FormContainer = React.lazy(() =>
   import("./components/Step6FormContainer")
 );
-const Summary = React.lazy(() => import("./components/Summary"));
+// const Summary = React.lazy(() => import("./components/Summary"));
+
+import Summary from "./components/Summary";
 
 // Fallback loading component
 const Loading = () => <div>Loading...</div>;
@@ -78,40 +80,27 @@ const AnimatedRoutes = () => {
 
           <Routes location={location} key={location.pathname}>
             {/* Root/Homepage Route */}
-            <Route
-              path="/hmua"
-              element={
-                <motion.div
-                  variants={pageVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  transition={{ duration: 0.3 }}
-                >
-                  <Homepage />
-                </motion.div>
-              }
-            />
-            {/* Protected Admin Route */}
-            <Route
-              path="/admin"
-              element={
-                <motion.div
-                  variants={pageVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  transition={{ duration: 0.3 }}
-                >
-                  <Admin />
-                </motion.div>
-              }
-            />
-
-            {/* App Layout Route */}
             <Route path="/app" element={<Applayout />}>
               <Route
-                path="weddingDetails"
+                path="/app/hmua"
+                element={
+                  <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Homepage />
+                  </motion.div>
+                }
+              />
+
+              {/* App Layout Route */}
+              <Route path="/app" element={<Homepage />} />
+
+              <Route
+                path="/app/weddingDetails"
                 element={
                   <motion.div
                     variants={pageVariants}
@@ -125,7 +114,7 @@ const AnimatedRoutes = () => {
                 }
               />
               <Route
-                path="PackageSelection"
+                path="/app/PackageSelection"
                 element={
                   <motion.div
                     variants={pageVariants}

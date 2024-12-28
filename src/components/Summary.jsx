@@ -6,10 +6,20 @@ import { getPrice, insertBooking } from "../services/price";
 import { useForm } from "react-hook-form";
 import QRCodeComponent from "./QRCodeComponent";
 import { useNavigate } from "react-router-dom";
+import SignatureComponent from "./SignatureComponent";
+import ContractComponent from "./ContractComponent";
 
 const Summary = () => {
-  const { step1, step2, step3, step6, step7, limitedpax } =
-    useContext(FormContext);
+  const {
+    step1,
+    step2,
+    step3,
+    step6,
+    step7,
+    limitedpax,
+    signature,
+    setSignature,
+  } = useContext(FormContext);
 
   const additional =
     Number(step7.adult) +
@@ -62,10 +72,12 @@ const Summary = () => {
     mutationFn: insertBooking,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["insertBooking"] });
-      setShowQRCode(true);
+      alert("Booking Submitted Successfully!");
+      navigate("/app/hmua");
       reset();
     },
   });
+
   let flattenedBooking;
   const handleBook = () => {
     const bookingDetails = {
@@ -106,6 +118,7 @@ const Summary = () => {
           : step6 === "APHRODITE"
           ? convert(aphroditeTotal)
           : "N/A",
+      signature: signature,
     };
 
     flattenedBooking = {
@@ -125,18 +138,20 @@ const Summary = () => {
       socialMedia: bookingDetails.clientDetails.socialMedia,
       ceremonyVenue: bookingDetails.weddingInfo.ceremonyVenue,
       total: bookingDetails.total,
+      signature: bookingDetails.signature,
     };
 
     console.log("Booking Details:", bookingDetails);
     mutate(flattenedBooking);
   };
+
+  const [signatureData, setSignatureData] = useState(null);
   const navigate = useNavigate();
-  function handleQR() {
-    setShowQRCode(false); // Close QR code modal
-    setTimeout(() => {
-      navigate("/hmua"); // Navigate to /hmua after a short delay
-    }, 100); // Adjust the delay (in ms) as necessary
-  }
+
+  const handleSignatureSave = (signatureDataURL) => {
+    setSignatureData(signatureDataURL); // Save the signature data URL
+  };
+
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-semibold text-purple-700">Summary</h2>
@@ -240,6 +255,8 @@ const Summary = () => {
         )}
       </div>
 
+      {/* Signature Component */}
+
       <div className="flex flex-col items-center gap-2">
         <div className="mt-6 flex flex-col items-center">
           <h1 className="text-2xl font-bold text-gray-800 mb-2">Total</h1>
@@ -250,37 +267,23 @@ const Summary = () => {
             {step6 === "APHRODITE" && convert(aphroditeTotal)}
           </p>
         </div>
-        <button
-          onClick={handleBook}
-          className="px-4 py-2 bg-peach-600 text-white rounded-lg hover:bg-peach-300"
-        >
-          Submit Booking
-        </button>
-        {showQRCode && (
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
-              <h2 className="text-xl font-semibold text-green-600 text-center mb-4">
-                Booking Successful!
-              </h2>
-              <QRCodeComponent
-                value={
-                  flattenedBooking && Object.keys(flattenedBooking).length > 0
-                    ? JSON.stringify(flattenedBooking)
-                    : ""
-                }
-                size={256}
-              />
-              <div className="mt-4 text-center">
-                <button
-                  onClick={() => handleQR()}
-                  className="px-4 py-2 bg-peach-600 text-white rounded-lg hover:bg-peach-300"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
+        {!signature ? (
+          <ContractComponent
+            signature={signature}
+            setSignature={setSignature}
+          />
+        ) : (
+          <>
+            <button
+              onClick={handleBook}
+              className="px-4 py-2 bg-peach-600 text-white rounded-lg hover:bg-peach-300"
+            >
+              Submit Booking
+            </button>
+          </>
         )}
+
+        {showQRCode && <></>}
       </div>
     </div>
   );

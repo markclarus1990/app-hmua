@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import BUTTON from "../ui/BUTTON";
 import { useForm } from "react-hook-form";
 import { useFormContext } from "../contexts/FormContext";
+import { useNavigate } from "react-router-dom";
 
 const AdditionalHeadsForm = ({ onNextStep }) => {
   const [additionalHeads, setAdditionalHeads] = useState({
@@ -20,6 +21,7 @@ const AdditionalHeadsForm = ({ onNextStep }) => {
       [name]: value,
     }));
   };
+  const navigate = useNavigate();
 
   const handleServiceChange = (e) => {
     const { name, checked } = e.target;
@@ -40,21 +42,33 @@ const AdditionalHeadsForm = ({ onNextStep }) => {
     );
     console.log("selectedTransport", selectedTransport);
   };
+
   const { register, handleSubmit, reset, getValues, formState } = useForm();
   const { setStep7Data, step7 } = useFormContext();
+  let isAnyFieldBlank;
+  const onSubmit = (data) => {
+    // Check if any field is blank
+    isAnyFieldBlank =
+      !data.adult || !data.motherRelative || !data.ninang || !data.groomingHMU;
 
-  function onSubmit(data) {
+    if (isAnyFieldBlank) {
+      alert("Please fill in all the required fields.");
+      return; // Prevent form submission if any field is blank
+    }
+
     setStep7Data(data);
     console.log("FROM CONTEXT", step7);
-  }
+    navigate("/app/summary");
+  };
+
   return (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-semibold text-purple-700">
+    <div className="space-y-6 m-0">
+      <h2 className="text-2xl font-semibold text-purple-700 m-0">
         Additional Heads and Services
       </h2>
 
       {/* Additional Heads Section */}
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-1">
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <h3 className="text-xl font-bold text-pink-600">Additional Heads</h3>
           <div className="space-y-4 mt-4 text-purple-700">
@@ -177,8 +191,16 @@ const AdditionalHeadsForm = ({ onNextStep }) => {
             </div>
           </div>
         </div>
-        <BUTTON form="summary" />
+        <BUTTON form={!isAnyFieldBlank ? "packageType" : "summary"} />
       </form>
+      <div className="flex justify-center ">
+        <button
+          onClick={() => navigate("/app/summary")}
+          className="px-6 py-2 text-white bg-red-600 rounded-lg hover:bg-red-700 transition"
+        >
+          SKIP
+        </button>
+      </div>
     </div>
   );
 };

@@ -7,7 +7,7 @@ function BUTTON({ NS, PS, form }) {
   const navigate = useNavigate();
 
   return (
-    <div className="mt-6 flex justify-between mb-20">
+    <div className="mt-6 mb-0 flex justify-between mb-20">
       <button
         // type={PS ? `button` : `submit`}
         onClick={() => navigate(-1)}

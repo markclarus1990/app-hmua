@@ -14,7 +14,7 @@ const WeddingDetails = ({ register }) => {
         <input
           type="date"
           id="weddingDate"
-          {...register("weddingDate")}
+          {...register("weddingDate", { required: true })}
           className="w-full p-3 mt-2 rounded-lg bg-white text-purple-900 border border-purple-300 focus:outline-none focus:ring-2 focus:ring-violet-400"
         />
       </div>
@@ -29,7 +29,7 @@ const WeddingDetails = ({ register }) => {
         <input
           type="time"
           id="hmuArrival"
-          {...register("hmuArrival")}
+          {...register("hmuArrival", { required: true })}
           className="w-full p-3 mt-2 rounded-lg bg-white text-purple-900 border border-purple-300 focus:outline-none focus:ring-2 focus:ring-violet-400"
         />
       </div>
@@ -44,7 +44,7 @@ const WeddingDetails = ({ register }) => {
         <input
           type="time"
           id="hmuStart"
-          {...register("hmuStart")}
+          {...register("hmuStart", { required: true })}
           className="w-full p-3 mt-2 rounded-lg bg-white text-purple-900 border border-purple-300 focus:outline-none focus:ring-2 focus:ring-violet-400"
         />
       </div>
@@ -59,7 +59,7 @@ const WeddingDetails = ({ register }) => {
         <input
           type="time"
           id="ceremonyStart"
-          {...register("ceremonyStart")}
+          {...register("ceremonyStart", { required: true })}
           className="w-full p-3 mt-2 rounded-lg bg-white text-purple-900 border border-purple-300 focus:outline-none focus:ring-2 focus:ring-violet-400"
         />
       </div>
@@ -74,7 +74,7 @@ const WeddingDetails = ({ register }) => {
         <input
           type="text"
           id="ceremonyVenue"
-          {...register("ceremonyVenue")}
+          {...register("ceremonyVenue", { required: true })}
           className="w-full p-3 mt-2 rounded-lg bg-white text-purple-900 border border-purple-300 focus:outline-none focus:ring-2 focus:ring-violet-400"
           placeholder="e.g., SADP Silang"
         />
@@ -90,7 +90,7 @@ const WeddingDetails = ({ register }) => {
         <input
           type="text"
           id="prepVenue"
-          {...register("prepVenue")}
+          {...register("prepVenue", { required: true })}
           className="w-full p-3 mt-2 rounded-lg bg-white text-purple-900 border border-purple-300 focus:outline-none focus:ring-2 focus:ring-violet-400"
           placeholder="e.g., TBF (possible at Abagatan)"
         />
@@ -106,7 +106,7 @@ const WeddingDetails = ({ register }) => {
         <input
           type="text"
           id="receptionVenue"
-          {...register("receptionVenue")}
+          {...register("receptionVenue", { required: true })}
           className="w-full p-3 mt-2 rounded-lg bg-white text-purple-900 border border-purple-300 focus:outline-none focus:ring-2 focus:ring-violet-400"
           placeholder="Enter Reception Venue"
         />
