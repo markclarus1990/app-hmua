@@ -203,6 +203,20 @@ const AnimatedRoutes = () => {
 };
 
 const App = () => {
+  useEffect(() => {
+    // Function to check if the app is accessed via Messenger's browser
+    function isMessengerBrowser() {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      return userAgent.includes("FBAN") || userAgent.includes("FBAV");
+    }
+
+    // Alert the user if they are using the Messenger browser
+    if (isMessengerBrowser()) {
+      alert(
+        "You are using the app through the Messenger browser. For the best experience, please open it in a standard browser like Google Chrome."
+      );
+    }
+  }, []);
   return (
     <FormProvider>
       <BrowserRouter>
