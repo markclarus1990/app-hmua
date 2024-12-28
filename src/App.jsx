@@ -80,7 +80,7 @@ const AnimatedRoutes = () => {
 
           <Routes location={location} key={location.pathname}>
             {/* Root/Homepage Route */}
-            <Route path="/app" element={<Applayout />}>
+            <Route path="/" element={<Applayout />}>
               <Route
                 path="/app-hmua/"
                 element={
