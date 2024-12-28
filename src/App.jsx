@@ -128,7 +128,7 @@ const AnimatedRoutes = () => {
                 }
               />
               <Route
-                path="CoupleDetailsForm"
+                path="/app/CoupleDetailsForm"
                 element={
                   <motion.div
                     variants={pageVariants}
@@ -142,7 +142,7 @@ const AnimatedRoutes = () => {
                 }
               />
               <Route
-                path="ServiceSelectionForm"
+                path="/app/ServiceSelectionForm"
                 element={
                   <motion.div
                     variants={pageVariants}
@@ -156,7 +156,7 @@ const AnimatedRoutes = () => {
                 }
               />
               <Route
-                path="summary"
+                path="/app/summary"
                 element={
                   <motion.div
                     variants={pageVariants}
@@ -170,7 +170,7 @@ const AnimatedRoutes = () => {
                 }
               />
               <Route
-                path="packageType"
+                path="app/packageType"
                 element={
                   <motion.div
                     variants={pageVariants}

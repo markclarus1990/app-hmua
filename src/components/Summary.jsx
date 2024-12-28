@@ -26,7 +26,7 @@ const Summary = () => {
     Number(step7.groomingHMU) +
     Number(step7.motherRelative) +
     Number(step7.ninang);
-  const addTotal = additional * 1300;
+  const addTotal = isNaN(additional) ? 0 : additional * 1300;
 
   const formattedTotal = new Intl.NumberFormat("en-PH", {
     style: "currency",
@@ -73,7 +73,7 @@ const Summary = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["insertBooking"] });
       alert("Booking Submitted Successfully!");
-      navigate("/app/hmua");
+      navigate("/app-hmua");
       reset();
     },
   });
