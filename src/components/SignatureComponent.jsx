@@ -1,20 +1,47 @@
 import React, { useRef } from "react";
+import { useFormContext } from "../contexts/FormContext";
 import SignatureCanvas from "react-signature-canvas";
+import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
+import { updateBooking } from "../services/price";
+import { useNavigate } from "react-router-dom";
 
-function SignatureComponent({ onSave, signature, setSignature, accepted }) {
+function SignatureComponent({
+  onSave,
+
+  accepted,
+  handleBook,
+}) {
   const sigCanvas = useRef(null);
-
+  const { signature, setSignature, booking_id } = useFormContext();
+  const navigate = useNavigate();
   // Function to clear the canvas
   const clearSignature = () => {
     sigCanvas.current.clear();
   };
+  const updateBookingMutation = useMutation({
+    mutationFn: updateBooking,
+    onSuccess: () => {
+      toast.success("Updated Successfully");
+      navigate("/");
+    },
+  });
 
   // Function to save the signature as an image
   const saveSignature = () => {
     if (!sigCanvas.current.isEmpty()) {
       const signatureDataURL = sigCanvas.current.toDataURL("image/png");
-      onSave(signatureDataURL); // Pass the signature data back to parent
+      // onSave(signatureDataURL);
       setSignature(signatureDataURL);
+      console.log("XXXXXXXXXXXXXXXXX", signature);
+      sessionStorage.setItem("signature", signatureDataURL);
+      console.log("UPLOAD SIGNATURE:", sessionStorage.getItem("signature"));
+
+      updateBookingMutation.mutate({
+        id: booking_id,
+        obj: { signature: signatureDataURL, status: "2" },
+      });
+      //handleBook();
     } else {
       alert("Please provide a signature before saving.");
     }
@@ -48,7 +75,7 @@ function SignatureComponent({ onSave, signature, setSignature, accepted }) {
               : "bg-gray-500 cursor-not-allowed"
           }`}
         >
-          Accept and Submit
+          Submit Signed Contract
         </button>
       </div>
     </div>

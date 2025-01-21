@@ -3,9 +3,8 @@ import SignatureComponent from "./SignatureComponent";
 import { getPolicies } from "../services/price";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { FormProvider, useFormContext } from "react-hook-form";
 
-const ContractComponent = ({ handleBook }) => {
+const POLI = ({ handleBook }) => {
   const [accepted, setAccepted] = useState(false);
 
   // Function to handle the saved signature
@@ -34,13 +33,11 @@ const ContractComponent = ({ handleBook }) => {
 
   return (
     <div className="p-6 font-sans bg-white">
-      <h2 className="text-2xl font-bold mb-4 text-peach-600 text-center">
-        Wedding Makeup Artist Contract
-      </h2>
       <p className="font-semibold text-peach-600 text-center">
         <strong className="text-peach-600">Policies</strong>
       </p>
-      <div className="max-h-[300px] overflow-y-auto mb-4 flex flex-col gap-2">
+      {/* overflow-y-auto */}
+      <div className="  mb-1 flex flex-col gap-2">
         {policies.map((policy) => (
           <div key={policy.policies_id}>
             <h3 className="text-xl font-semibold text-peach-600">
@@ -54,22 +51,7 @@ const ContractComponent = ({ handleBook }) => {
         ))}
       </div>
 
-      <div>
-        <h3 className="text-xl font-semibold text-peach-600">
-          Details of Service(s) Chosen
-        </h3>
-        <p className="mb-2">
-          <strong>Inclusions:</strong> 10 pax Adult Ladies: PRO-HD Traditional
-          Makeup & Hairstyle w/ Free False Lashes...
-        </p>
-        <p className="mb-4">
-          <strong>Assigned Team:</strong> TBA
-        </p>
-        <h3 className="text-xl font-semibold text-peach-600">Re-scheduling:</h3>
-        <p>₱ 2,000.00 non-deductible fee applies...</p>
-      </div>
-
-      <div className="mt-4">
+      <div className="mt-1">
         <label className="flex items-center space-x-2 text-peach-400">
           <input
             type="checkbox"
@@ -95,4 +77,4 @@ const ContractComponent = ({ handleBook }) => {
   );
 };
 
-export default ContractComponent;
+export default POLI;

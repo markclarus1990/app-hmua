@@ -44,7 +44,7 @@ const LimitedOfferPackagesDetails = ({
     }).format(price);
   }
 
-  const limited = pricing?.find((item) => item.name === "Athena");
+  const limited = pricing?.find((item) => item.name === "Exclusive Offer");
 
   return (
     <div className="space-y-6">
@@ -59,16 +59,13 @@ const LimitedOfferPackagesDetails = ({
       >
         <h3 className="text-xl font-bold text-purple-600">
           EXCLUSIVE OFFER:{" "}
-          <span className="text-red-600">
-            {convert(limited?.limited_offer)}
-          </span>{" "}
-          per head
+          <span className="text-red-600">{convert(limited?.price)}</span> per
+          head
         </h3>
-        <ul className="list-disc pl-5 text-lg text-purple-600">
+        <ul className="list-none pl-5 text-lg text-purple-600">
           <li className="text-gray-700">
-            Before:{" "}
-            <span className="line-through text-yellow-400">4,500.00</span> per
-            head
+            Before: <span className="line-through text-red-400">4,500.00</span>{" "}
+            per head
           </li>
           <li>PRO-HD Traditional Makeup & Hairstyle w/ Free False Lashes</li>
           <li>Minimum of 8 pax heads</li>

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useFormContext } from "../contexts/FormContext";
 import BUTTON from "../ui/BUTTON";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Step3FormContainer = () => {
   const { setStep3Data, step3 } = useFormContext();
@@ -23,7 +24,7 @@ const Step3FormContainer = () => {
     );
 
     if (isAnyFieldBlank) {
-      alert("Please fill in all the fields.");
+      toast.error("Please fill in all the fields.");
       return; // Don't proceed if fields are missing
     }
 
@@ -31,11 +32,11 @@ const Step3FormContainer = () => {
     console.log("FROM CONTEXT", step3);
 
     // If all fields are filled, proceed to the next step
-    navigate("/app/ServiceSelectionForm"); // Adjust the path if necessary
+    navigate("/ServiceSelectionForm"); // Adjust the path if necessary
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="">
       <CoupleDetailsForm register={register} />
       <BUTTON
         form={isAnyFieldBlank ? "ServiceSelectionForm" : "CoupleDetailsForm"}

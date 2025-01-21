@@ -11,3 +11,22 @@
 * label {
   color: rgb(53, 53, 53);
 }
+* {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+/* * {
+  background-color: #ffbca2;
+}
+
+* input {
+  background-color: whitesmoke;
+}
+
+* ul,
+h3,
+li,
+span,
+.flex {
+  background-color: whitesmoke;
+} */

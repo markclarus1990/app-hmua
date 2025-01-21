@@ -1,5 +1,6 @@
 // src/contexts/FormContext.js
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
+import { getPrice } from "../services/price";
 
 // Create the FormContext
 export const FormContext = createContext();
@@ -14,8 +15,10 @@ export const FormProvider = ({ children }) => {
     homeScreen: true,
     limitedpax: 0,
     signat: "",
-
+    additional: 0,
     currentStep: 1,
+    code: "",
+    booking_id: "",
   };
 
   function reducer(state, action) {
@@ -64,6 +67,22 @@ export const FormProvider = ({ children }) => {
           ...state,
           signat: action.payload,
         };
+
+      case "additional":
+        return {
+          ...state,
+          additional: Number(action?.payload),
+        };
+      case "code":
+        return {
+          ...state,
+          code: action.payload,
+        };
+      case "booking_id":
+        return {
+          ...state,
+          booking_id: action.payload,
+        };
       case "limited":
         return { ...state, limitedpax: action.payload };
       case "nextStep":
@@ -84,7 +103,30 @@ export const FormProvider = ({ children }) => {
   const setStep6Data = (data) => dispatch({ type: "step6", payload: data });
   const setStep7Data = (data) => dispatch({ type: "step7", payload: data });
   const setlimited = (data) => dispatch({ type: "limited", payload: data });
-  const setSignature = (data) => dispatch({ type: "signature", payload: data });
+  // const setCode = (data) => dispatch({ type: "code", payload: data }console.log("asd"));
+
+  function setCode(data) {
+    console.log("FROM CONTEEXT", data);
+    dispatch({ type: "code", payload: data });
+    console.log("FROM CONTEEXT", state.code);
+  }
+
+  function setBookingId(data) {
+    dispatch({ type: "booking_id", payload: data });
+  }
+  useEffect(
+    function () {
+      console.log("forUpload", state.signat);
+    },
+    [state.signat]
+  );
+
+  function setSignature(data) {
+    dispatch({ type: "signature", payload: data });
+    console.log("FROM CONTEXTss", state.signat);
+  }
+  const setAdditional = (data) =>
+    dispatch({ type: "additional", payload: data });
 
   const Booking = () => dispatch({ type: "book" });
 
@@ -104,6 +146,10 @@ export const FormProvider = ({ children }) => {
         step1: state.step1,
         step2: state.step2,
         step3: state.step3,
+        code: state.code,
+        booking_id: state.booking_id,
+        setBookingId,
+        setCode,
         setStep1Data,
         setStep2Data,
         setStep3Data,
@@ -112,6 +158,8 @@ export const FormProvider = ({ children }) => {
         Booking,
         setlimited,
         setSignature,
+        setAdditional,
+        additional: state.additional,
         signature: state.signat,
         limitedpax: state.limitedpax,
         step6: state.step6,

@@ -38,58 +38,44 @@ const PremiumPackagesDetails = ({
             ATHENA:
             {convert(Number(athenaP.price))} ONLY
           </h3>
-          <ul className="list-disc pl-5 text-lg text-purple-600">
-            <li>FREE Trial Makeup</li>
-            <li>
-              PRO-HD Airbrush/Traditional Makeup & Hairstyle w/ Free False
-              Lashes
-            </li>
-            <li>PAX: Bride, Groom, 2 Mothers</li>
-            <li>More details will be discussed & declared on the 2nd page.</li>
+          <ul className="list-none pl-5 text-lg text-purple-600">
+            <li dangerouslySetInnerHTML={{ __html: athenaP.description }}></li>
           </ul>
         </div>
-        <figure className="bg-white shadow-lg rounded-[25px] p-2 flex items-center justify-center h-25 w-25">
+        <figure className="bg-white shadow-lg rounded-[25px] p-2 flex items-center justify-center h-25 w-25 opacity-[0.8]">
           <img src={athena} alt="Athena" className="h-20 w-20 rounded-full" />
         </figure>
       </div>
 
       <div
-        className="bg-white p-6 rounded-lg shadow-lg space-y-4 cursor-pointer hover:shadow-xl flex gap-10"
+        className="bg-white p-6 rounded-lg shadow-lg space-y-4 cursor-pointer hover:shadow-xl flex gap-10 opacity-[0.8]"
         onClick={() => handleClick("HERA")} // Pass the selected package type
       >
         <div>
           <h3 className="text-xl font-bold text-pink-600">
             HERA: {convert(heraP.price)} ONLY
           </h3>
-          <ul className="list-disc pl-5 text-lg text-purple-600">
-            <li>
-              PRO-HD Airbrush/Traditional Makeup & Hairstyle w/ Free False
-              Lashes
-            </li>
-            <li>PAX: Bride, Groom, 2 Mothers</li>
-            <li>More details will be discussed & declared on the 2nd page.</li>
+          <ul className="list-none pl-5 text-lg text-purple-600">
+            <li dangerouslySetInnerHTML={{ __html: heraP.description }}></li>
           </ul>
         </div>
-        <figure className="bg-white shadow-lg rounded-[25px] p-2 flex items-center justify-center h-25 w-25">
+        <figure className="bg-white shadow-lg rounded-[25px] p-2 flex items-center justify-center h-25 w-25 opacity-[0.8]">
           <img src={hera} alt="hera" className="h-20 w-20 rounded-full" />
         </figure>
       </div>
 
       <div
-        className="bg-white p-6 rounded-lg shadow-lg space-y-4 cursor-pointer hover:shadow-xl flex gap-10 "
+        className="bg-white p-6 rounded-lg shadow-lg space-y-4 cursor-pointer hover:shadow-xl flex gap-10 opacity-[0.8]"
         onClick={() => handleClick("APHRODITE")} // Pass the selected package type
       >
         <div>
           <h3 className="text-xl font-bold text-pink-600">
             APHRODITE: {convert(aphroditeP.price)} ONLY
           </h3>
-          <ul className="list-disc pl-5 text-lg text-purple-600">
-            <li>
-              PRO-HD Airbrush/Traditional Makeup & Hairstyle w/ Free False
-              Lashes
-            </li>
-            <li>PAX: Bride, Groom, 2 Mothers</li>
-            <li>More details will be discussed & declared on the 2nd page.</li>
+          <ul className="list-none pl-5 text-lg text-purple-600">
+            <li
+              dangerouslySetInnerHTML={{ __html: aphroditeP.description }}
+            ></li>
           </ul>
         </div>
         <figure className="bg-white shadow-lg rounded-[25px] p-2 flex items-center justify-center h-25 w-25">

@@ -20,7 +20,7 @@ const Step6FormContainer = () => {
   }
 
   const [pack, setPack] = useState("");
-  const { setStep6Data, step6, setlimited } = useFormContext();
+  const { setStep6Data, step6, setlimited, setAdditional } = useFormContext();
   const { register, handleSubmit, reset, getValues, formState } = useForm();
   const { NS, PS, currentStep } = useFormContext();
   const navigate = useNavigate();
@@ -61,24 +61,24 @@ const Step6FormContainer = () => {
 
   return (
     <>
-      {!isPackageSelected && (
+      {/* {!isPackageSelected && (
         <button
           onClick={() => navigate(-1)}
-          className="px-6 py-2 text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition mb-9"
+          className="px-6 py-2 text-white bg-peach-600 rounded-lg hover:bg-peach-500 transition mb-2"
         >
           Previous
         </button>
-      )}
+      )} */}
 
-      <div className="space-y-6">
+      <div className="flex flex-col py-10 mt-7 px-2 gap-3 bg-peach-300 w-[500px] mx-auto my-auto rounded-lg  xs:w-[300px] mt-[1px] sm:w-[500px] md:w-[800px] opacity-[0.8]">
         {!isPackageSelected ? (
           // This is the step where the user selects a package
           <div className="space-y-6">
-            <h2 className="text-2xl font-semibold text-purple-700">
+            {/* <h2 className="text-2xl font-semibold text-peach-700">
               Choose Package Type
-            </h2>
+            </h2> */}
 
-            <p className="text-lg text-purple-600">
+            <p className="text-lg text-slate-900">
               Please choose between the Premium Packages or the Limited Offer
               Packages.
             </p>
@@ -87,13 +87,13 @@ const Step6FormContainer = () => {
             <div className="flex justify-center gap-10 items-center">
               <button
                 onClick={() => handleClick("premium")}
-                className="px-6 py-2 text-white bg-purple-900 rounded-lg hover:bg-pink-700 transition"
+                className="px-6 py-2 text-white bg-peach-900 rounded-lg hover:bg-peach-700 transition bg-peach-600"
               >
                 Premium
               </button>
               <button
                 onClick={() => handleClick("limited")}
-                className="px-6 py-2 text-white bg-purple-900 rounded-lg hover:bg-pink-700 transition"
+                className="px-6 py-2 text-white bg-peach-900 rounded-lg hover:bg-peach-700 transition bg-peach-600"
               >
                 Limited Offers
               </button>
@@ -122,7 +122,10 @@ const Step6FormContainer = () => {
           </div>
         ) : (
           // This is the next step where the AdditionalHeadsForm is shown
-          <AdditionalHeadsForm packageType={selectedPackage} />
+          <AdditionalHeadsForm
+            packageType={selectedPackage}
+            pricing={pricing}
+          />
         )}
       </div>
     </>

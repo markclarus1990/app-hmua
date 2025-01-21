@@ -11,14 +11,10 @@ const ServiceSelectionForm = ({ services, setServices }) => {
   };
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-semibold text-purple-700">
-        Choose Your Desired Service/s
+    <div className="flex flex-col py-10 px-2 gap-3 bg-peach-300 w-[500px] mx-auto my-auto rounded-lg mt-4 xs:w-[300px] mt-[100px] sm:w-[500px] md:w-[800px] opacity-[0.8]">
+      <h2 className="text-2xl font-semibold text-pink-700 text-center">
+        Choose you desired package on the next page.
       </h2>
-      <p className="text-lg text-purple-600">
-        Please check all that apply. Please refer to the MENU for the
-        RATES/PRICES.
-      </p>
     </div>
   );
 };

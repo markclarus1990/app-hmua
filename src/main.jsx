@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App.jsx";
 import { createClient } from "@supabase/supabase-js";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const supabase = createClient(
   "https://kcvranbgzvrodkibapem.supabase.co",
@@ -14,6 +16,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <SessionContextProvider supabaseClient={supabase}>
       <App />
+      <ToastContainer />
     </SessionContextProvider>
   </StrictMode>
 );

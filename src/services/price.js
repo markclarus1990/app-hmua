@@ -12,6 +12,21 @@ export async function getPrice() {
   return data;
 }
 
+export async function getPolicies() {
+  const { data, error } = await supabase
+    .from("policies")
+    .select("*")
+    .order("policies_id", { ascending: true }); // Sort by 'status' in ascending order;
+
+  console.log("Data from Supabase:", data); // Log the data fetched from Supabase
+  if (error) {
+    console.error("Error fetching pricing:", error);
+    throw new Error("Price could not be loaded");
+  }
+
+  return data;
+}
+
 export async function updatePrice({ id, obj }) {
   const { data, error } = await supabase
     .from("pricing")
@@ -61,8 +76,38 @@ export async function insertBooking(flattenedBooking) {
 
     return data;
   } catch (error) {
-    alert("You have already been booked!");
+    alert(error);
     console.error("Error in insertBooking:", error);
     throw error;
   }
+}
+
+export async function getBookings() {
+  const { data, error } = await supabase
+    .from("bookings")
+    .select("*")
+    .order("status", { ascending: true }) // Sort by 'status' in ascending order
+    .order("weddingDate", { ascending: true });
+  if (error) {
+    console.error(error);
+    throw new Error("Bookings could not be loaded");
+  }
+
+  return data;
+}
+
+export async function updateBooking({ id, obj }) {
+  const { data, error } = await supabase
+    .from("bookings")
+    .update(obj) // obj is the object that contains the fields to update
+    .eq("booking_id", id) // Use pricing_id instead of id
+    .select()
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Booking could not be updated");
+  }
+
+  return data;
 }

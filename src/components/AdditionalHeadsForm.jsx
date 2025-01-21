@@ -3,14 +3,27 @@ import BUTTON from "../ui/BUTTON";
 import { useForm } from "react-hook-form";
 import { useFormContext } from "../contexts/FormContext";
 import { useNavigate } from "react-router-dom";
+import { span } from "framer-motion/client";
+import { toast } from "react-toastify";
+import Input from "../ui/Input";
 
-const AdditionalHeadsForm = ({ onNextStep }) => {
+const AdditionalHeadsForm = ({ onNextStep, pricing }) => {
+  const { register, handleSubmit, reset, getValues, formState } = useForm();
+
   const [additionalHeads, setAdditionalHeads] = useState({
     adult: 0,
     motherRelative: 0,
     ninang: 0,
     groomingHMU: 0,
   });
+  const additional = pricing?.find((item) => item?.name === "Additional Heads");
+  function convert(price) {
+    return new Intl.NumberFormat("en-PH", {
+      style: "currency",
+      currency: "PHP",
+    }).format(price);
+  }
+
   const [selectedServices, setSelectedServices] = useState([]);
   const [selectedTransport, setSelectedTransport] = useState([]);
 
@@ -43,22 +56,29 @@ const AdditionalHeadsForm = ({ onNextStep }) => {
     console.log("selectedTransport", selectedTransport);
   };
 
-  const { register, handleSubmit, reset, getValues, formState } = useForm();
-  const { setStep7Data, step7 } = useFormContext();
+  const {
+    setStep7Data,
+    step7,
+    setAdditional,
+    additional: adv,
+  } = useFormContext();
   let isAnyFieldBlank;
   const onSubmit = (data) => {
     // Check if any field is blank
-    isAnyFieldBlank =
-      !data.adult || !data.motherRelative || !data.ninang || !data.groomingHMU;
+    // isAnyFieldBlank =
+    //   !data.adult || !data.motherRelative || !data.ninang || !data.groomingHMU;
 
-    if (isAnyFieldBlank) {
-      alert("Please fill in all the required fields.");
-      return; // Prevent form submission if any field is blank
-    }
+    // if (isAnyFieldBlank) {
+    //   toast.error("Please fill in all the required fields.");
+    //   return; // Prevent form submission if any field is blank
+    // }
 
     setStep7Data(data);
+    console.log(additional.price);
+    setAdditional(additional.price);
+    console.log("ADD", adv);
     console.log("FROM CONTEXT", step7);
-    navigate("/app/summary");
+    navigate("/summary");
   };
 
   return (
@@ -70,61 +90,74 @@ const AdditionalHeadsForm = ({ onNextStep }) => {
       {/* Additional Heads Section */}
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-1">
         <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h3 className="text-xl font-bold text-pink-600">Additional Heads</h3>
+          <div className="flex gap-2">
+            <h3 className="text-xl font-bold text-pink-600">
+              Additional Heads{" "}
+            </h3>
+            (
+            <span className="text-red-700 text-xl">
+              {convert(additional.price)}
+            </span>
+            )
+          </div>
           <div className="space-y-4 mt-4 text-purple-700">
             <div>
-              <label htmlFor="adult" className="text-lg">
-                ADULT (pax x 1,300.00)
+              <label htmlFor="adult" className="text-lg text-pink-700">
+                ADULT
               </label>
-              <input
-                type="number"
-                id="adult"
-                name="adult"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md"
-                min="0"
-                {...register("adult")}
+              <Input
+                name={"adult"}
+                type={"number"}
+                placeholder={
+                  "You can leave this blank and proceed to next form if you don't have any additional"
+                }
+                register={register}
+                className="w-full text-center p-3 mt-2 rounded-lg bg-white text-pink-900 border border-purple-300 focus:outline-none focus:ring-2 focus:ring-pink-400"
               />
             </div>
 
             <div>
-              <label htmlFor="motherRelative" className="text-lg">
+              <label htmlFor="motherRelative" className="text-lg text-pink-700">
                 Mother/Sister/Relative
               </label>
-              <input
-                type="number"
-                id="motherRelative"
-                name="motherRelative"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md"
-                min="0"
-                {...register("motherRelative")}
+
+              <Input
+                name={"motherRelative"}
+                type={"number"}
+                placeholder={
+                  "You can leave this blank and proceed to next form if you don't have any additional"
+                }
+                register={register}
               />
             </div>
 
             <div>
-              <label htmlFor="ninang" className="text-lg">
+              <label htmlFor="ninang" className="text-lg text-pink-700">
                 Ninang
               </label>
-              <input
-                type="number"
-                id="ninang"
-                name="ninang"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md"
-                min="0"
-                {...register("ninang")}
+
+              <Input
+                name={"ninang"}
+                type={"number"}
+                placeholder={
+                  "You can leave this blank and proceed to next form if you don't have any additional"
+                }
+                register={register}
               />
             </div>
 
             <div>
-              <label htmlFor="groomingHMU" className="text-lg">
+              <label htmlFor="groomingHMU" className="text-lg text-pink-700">
                 Grooming HMU
               </label>
-              <input
-                type="number"
-                id="groomingHMU"
-                name="groomingHMU"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md"
-                min="0"
-                {...register("groomingHMU")}
+
+              <Input
+                name={"groomingHMU"}
+                type={"number"}
+                placeholder={
+                  "You can leave this blank and proceed to next form if you don't have any additional"
+                }
+                register={register}
               />
             </div>
           </div>
@@ -193,14 +226,17 @@ const AdditionalHeadsForm = ({ onNextStep }) => {
         </div>
         <BUTTON form={!isAnyFieldBlank ? "packageType" : "summary"} />
       </form>
-      <div className="flex justify-center ">
+      {/* <div className="flex justify-center ">
         <button
-          onClick={() => navigate("/app/summary")}
+          onClick={() => {
+            navigate("/summary");
+            setAdditional(additional.price);
+          }}
           className="px-6 py-2 text-white bg-red-600 rounded-lg hover:bg-red-700 transition"
         >
           SKIP
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

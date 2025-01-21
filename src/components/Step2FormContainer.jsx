@@ -4,6 +4,7 @@ import SubmitButton from "./SubmitButton";
 import { useFormContext } from "../contexts/FormContext";
 import { useForm } from "react-hook-form";
 import BUTTON from "../ui/BUTTON";
+import { toast } from "react-toastify";
 
 const Step2FormContainer = ({ steps }) => {
   const [selectedPackage, setSelectedPackage] = useState("");
@@ -17,7 +18,7 @@ const Step2FormContainer = ({ steps }) => {
 
     // Check if selectedPackage is empty
     if (!selectedPackage) {
-      alert("Please select a makeup package.");
+      toast.error("Please select a makeup package.");
       return; // Don't proceed with setting data if no package is selected
     }
 
@@ -34,6 +35,7 @@ const Step2FormContainer = ({ steps }) => {
       />
       <BUTTON
         form={selectedPackage ? `CoupleDetailsForm` : "PackageSelection"}
+        selectedPackage={selectedPackage}
       />
     </form>
   );
