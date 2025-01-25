@@ -83,7 +83,13 @@ function Applayout() {
         {modalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50  items-center justify-center flex flex-col gap-2">
             <div className=" p-5 rounded-xl">
-              <CheckCode setModalOpen={setModalOpen} />
+              <CheckCode
+                setModalOpen={setModalOpen}
+                codeInput={codeInput}
+                setCodeInput={setCodeInput}
+                handleCode={handleCode}
+                selectedBook={selectedBook}
+              />
               {/* <span className="flex flex-col gap-1">
                 <label htmlFor="" className="text-start">
                   Enter CODE
