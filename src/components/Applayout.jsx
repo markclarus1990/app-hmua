@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getBookings } from "../services/price";
 import background from "/back.jpg";
 import { toast } from "react-toastify";
+import CheckCode from "./CheckCode";
 
 function Applayout() {
   const location = useLocation();
@@ -81,14 +82,9 @@ function Applayout() {
         <Outlet />
         {modalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50  items-center justify-center flex flex-col gap-2">
-            <div className="bg-white p-5 rounded-xl">
-              <div className="flex justify-end">
-                <span onClick={() => setModalOpen(false)} className="">
-                  ❌
-                </span>
-              </div>
-
-              <span className="flex flex-col gap-1">
+            <div className=" p-5 rounded-xl">
+              <CheckCode setModalOpen={setModalOpen} />
+              {/* <span className="flex flex-col gap-1">
                 <label htmlFor="" className="text-start">
                   Enter CODE
                 </label>
@@ -105,7 +101,7 @@ function Applayout() {
                 >
                   Submit
                 </button>
-              </span>
+              </span> */}
             </div>
           </div>
         )}

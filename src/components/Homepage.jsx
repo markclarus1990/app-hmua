@@ -4,6 +4,7 @@ import { useFormContext } from "../contexts/FormContext";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
+import CheckCode from "./CheckCode";
 
 const Homepage = () => {
   const { homeScreen } = useFormContext();
@@ -48,6 +49,7 @@ const Homepage = () => {
             >
               Start Now
             </button>
+
             {/* <GoogleLogin
               onSuccess={handleLoginSuccess}
               onError={handleLoginError}
